@@ -24,25 +24,23 @@ Python 3.x
 PySide6: Utilizado para criar a interface gráfica do usuário.
 ReportLab: Requerido para exportar os dados para PDF (assumido, embora não explicitado no código).
 
+
 Como Executar.
 
 Clone este repositório.
-
-Copiar código:
-git clone https://github.com/fernandoncidade/Gerenciador_Atividades.git
+bash
+git clone https://github.com/fernandoncidade/Gerenciador_Atividades
 cd Gerenciador_Atividades
 
 Instale as dependências necessárias.
-
-Copiar código:
+bash
 pip install -r requirements.txt
 
 Execute o aplicativo.
-
-Copiar código:
+bash
 python Gerenciador_Atividades.py
 
-Uso.
+Uso
 
 Ao iniciar o aplicativo, você verá uma interface para o cadastro de atividades avaliativas. Selecione as opções desejadas para cada campo e clique em "Registrar Definições" para salvar as atividades. Utilize os botões para limpar entradas ou exportar os dados para PDF.
 
