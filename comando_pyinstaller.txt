@@ -1,0 +1,57 @@
+Este código Python tem como finalidade gerenciar as atividades avaliativas agendadas pelos professores de determinadas disciplinas, com base na ficha da disciplina vigente para o semestre. É possível selecionar a ementa do curso, a disciplina, o tipo de atividade, a sequência (1ª, 2ª, 3ª, etc.) e a data do evento. Por fim, o usuário pode inserir as informações em uma tela (caixa de texto) e exportá-las para um arquivo PDF, que será salvo em um diretório escolhido pelo usuário.
+
+
+Execute o seguinte comando para transformar o código em um programa executável, importando as dependências necessárias:
+
+
+SEM ÍCONE:
+
+pyinstaller --onefile -w --hidden-import babel.numbers Reviews-Manager_v0.0.1.py
+
+
+
+COM ÍCONE:
+
+pyinstaller --onefile -w --hidden-import babel.numbers --icon=C:\Users\ferna\Project_Development\Projects_Python\Reviews-Manager_PySide6-pyppeteer\icones\ReviewsManager.ico Reviews-Manager_v0.0.1.py
+
+
+
+COM ÍCONE + ÍCONES DOS BOTÕES + ÍCONE TÍTULO GUI (Pasta dos Ícones Dentro do Diretório do Código Fonte):
+
+pyinstaller --onefile -w --hidden-import "babel.numbers" --icon="C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\icones\ReviewsManager.ico" --add-data="C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\icones\*;icones" --add-binary="C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\atividades.db;." --add-binary="C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\__pycache__\*;__pycache__" "Interface_Grafica.py"
+
+
+
+
+O comando abaixo funciona, mas não carrega as dependências necessárias para o código em questão.
+pyinstaller --onefile -w Reviews-Manager_v0.0.1.py
+
+
+
+Comando para instalar as bibliotecas e suas dependências (Apenas as instaladas por você):
+pip-chill > requirements.txt
+
+ou (incluindo as dependências instaladas por terceiros):
+pip freeze > requirements.txt
+
+
+pyinstaller --onefile -w --hidden-import "babel.numbers" 
+--icon="C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\icones\ReviewsManager.ico" 
+--add-data="C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\icones\*;icones" 
+--add-binary="C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\atividades.db;." 
+--add-binary="C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\__pycache__\*;__pycache__" 
+"Interface_Grafica.py"
+
+pyinstaller --onefile -w --hidden-import "babel.numbers" 
+--icon="C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\icones\ReviewsManager.ico" 
+--add-data="C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\icones\*;icones" 
+--add-binary="C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\atividades.db;." 
+--add-binary="C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\__pycache__\*;__pycache__" 
+"Interface_Grafica.py"
+
+
+
+"C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\atividades.db" 
+"C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\__pycache__" 
+"C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\icones" 
+"C:\Users\ferna\PROJETOS\Projetos_Python\Reviews-Manager\Gerenciador_Atividades\icones\ReviewsManager.ico" 
