@@ -23,7 +23,7 @@ class GerenciamentoAtividades:
         self.textbox = None
         self.conexao = sqlite3.connect('atividades.db')
         self.criar_tabela()
-
+            
     def criar_tabela(self):
         cursor = self.conexao.cursor()
         cursor.execute('''
@@ -39,7 +39,8 @@ class GerenciamentoAtividades:
         self.conexao.commit()
 
     def adicionar_atividade(self, atividade):
-        self.atividades[atividade['nome']] = atividade
+        chave_unica = (atividade['data'], atividade['tipo'], atividade['sequencia'], atividade['nome'], atividade['turma'])
+        self.atividades[chave_unica] = atividade
         cursor = self.conexao.cursor()
         cursor.execute('''
             INSERT INTO atividades (data, tipo, sequencia, nome, turma)
@@ -47,32 +48,38 @@ class GerenciamentoAtividades:
         ''', (atividade['data'], atividade['tipo'], atividade['sequencia'], atividade['nome'], atividade['turma']))
         self.conexao.commit()
 
-    def remover_atividade(self, nome_atividade):
-        if nome_atividade in self.atividades:
-            del self.atividades[nome_atividade]
+    def remover_atividade(self, atividade):
+        chave_unica = (atividade['data'], atividade['tipo'], atividade['sequencia'], atividade['nome'], atividade['turma'])
+        if chave_unica in self.atividades:
+            del self.atividades[chave_unica]
             cursor = self.conexao.cursor()
-            cursor.execute('DELETE FROM atividades WHERE nome = ?', (nome_atividade,))
+            cursor.execute('''
+                DELETE FROM atividades 
+                WHERE data = ? AND tipo = ? AND sequencia = ? AND nome = ? AND turma = ?
+            ''', chave_unica)
             self.conexao.commit()
 
     def listar_atividades(self):
         cursor = self.conexao.cursor()
         cursor.execute('SELECT data, tipo, sequencia, nome, turma FROM atividades')
         atividades_db = cursor.fetchall()
-        self.atividades = {a[3]: {'data': a[0], 'tipo': a[1], 'sequencia': a[2], 'nome': a[3], 'turma': a[4]} for a in atividades_db}
+        self.atividades = {(a[0], a[1], a[2], a[3], a[4]): {'data': a[0], 'tipo': a[1], 'sequencia': a[2], 'nome': a[3], 'turma': a[4]} for a in atividades_db}
         return list(self.atividades.values())
 
-    def buscar_atividade(self, nome_atividade):
-        return self.atividades.get(nome_atividade, None)
+    def buscar_atividade(self, atividade):
+        chave_unica = (atividade['data'], atividade['tipo'], atividade['sequencia'], atividade['nome'], atividade['turma'])
+        return self.atividades.get(chave_unica, None)
 
-    def atualizar_atividade(self, nome_atividade, novos_dados):
-        if nome_atividade in self.atividades:
-            self.atividades[nome_atividade].update(novos_dados)
+    def atualizar_atividade(self, atividade, novos_dados):
+        chave_unica = (atividade['data'], atividade['tipo'], atividade['sequencia'], atividade['nome'], atividade['turma'])
+        if chave_unica in self.atividades:
+            self.atividades[chave_unica].update(novos_dados)
             cursor = self.conexao.cursor()
             cursor.execute('''
                 UPDATE atividades
                 SET data = ?, tipo = ?, sequencia = ?, turma = ?
-                WHERE nome = ?
-            ''', (novos_dados['data'], novos_dados['tipo'], novos_dados['sequencia'], nome_atividade, novos_dados['turma']))
+                WHERE data = ? AND tipo = ? AND sequencia = ? AND nome = ? AND turma = ?
+            ''', (novos_dados['data'], novos_dados['tipo'], novos_dados['sequencia'], novos_dados['turma'], atividade['data'], atividade['tipo'], atividade['sequencia'], atividade['nome'], atividade['turma']))
             self.conexao.commit()
             return True
         return False
