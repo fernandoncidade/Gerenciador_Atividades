@@ -111,21 +111,29 @@ class InterfaceGerenciadorAtividades(QMainWindow):
 
         layout_sub_vertical_2 = QVBoxLayout()
 
+        button_clear_item = self.create_button("Excluir Item(ns)")
+        button_clear_item.clicked.connect(self.excluir_item)
         button_clear_ultima = self.create_button("Limpar Última Entrada")
         button_clear_ultima.clicked.connect(self.limpar_ultima_entrada)
         button_clear = self.create_button("Limpar Tudo")
         button_clear.clicked.connect(self.limpar_entradas)
+        button_editar_item = self.create_button("Editar Item(ns)")
+        button_editar_item.clicked.connect(self.editar_item)
         button_submiter = self.create_button("Registrar Definições")
         button_submiter.clicked.connect(self.submiter)
         button_export = self.create_button("Exportar para PDF")
         button_export.clicked.connect(self.exportar_para_pdf)
 
+        layout_sub_vertical_1.addWidget(button_clear_item)
         layout_sub_vertical_1.addWidget(button_clear_ultima)
         layout_sub_vertical_1.addWidget(button_clear)
+        layout_sub_vertical_2.addWidget(button_editar_item)
         layout_sub_vertical_2.addWidget(button_submiter)
         layout_sub_vertical_2.addWidget(button_export)
+        layout_sub_vertical_1.setAlignment(button_clear_item, Qt.AlignmentFlag.AlignLeft)
         layout_sub_vertical_1.setAlignment(button_clear_ultima, Qt.AlignmentFlag.AlignLeft)
         layout_sub_vertical_1.setAlignment(button_clear, Qt.AlignmentFlag.AlignLeft)
+        layout_sub_vertical_2.setAlignment(button_editar_item, Qt.AlignmentFlag.AlignRight)
         layout_sub_vertical_2.setAlignment(button_submiter, Qt.AlignmentFlag.AlignRight)
         layout_sub_vertical_2.setAlignment(button_export, Qt.AlignmentFlag.AlignRight)
 
@@ -178,6 +186,12 @@ class InterfaceGerenciadorAtividades(QMainWindow):
 
     def limpar_ultima_entrada(self):
         self.gerenciamento_atividades.limpar_ultima_entrada()
+
+    def excluir_item(self):
+        self.gerenciamento_atividades.excluir_item()
+
+    def editar_item(self):
+        self.gerenciamento_atividades.editar_item()
 
     def exportar_para_pdf(self):
         self.gerenciamento_atividades.exportar_para_pdf()
